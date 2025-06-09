@@ -394,6 +394,9 @@ function initializeNewsletterForm() {
         
         const name = document.getElementById('newsletter-name').value;
         const email = document.getElementById('newsletter-email').value;
+        let message = document.getElementById('message').value;
+
+
         
         if (name && email) {
             // Simulate subscription process
@@ -413,7 +416,17 @@ function initializeNewsletterForm() {
                     showNewsletterSuccess(name);
                 }, 1500);
             }, 1000);
+
             
+                gtag('event', 'newsletter_subscription', {
+                        'name': name,
+                        'email': email,
+                         'message': message,
+                         'message_char_count': message.length,
+                         'submission_count':1
+                 });
+
+            console.log('event sent successfully')
             console.log(`Newsletter subscription: ${name} - ${email}`);
         }
     });
